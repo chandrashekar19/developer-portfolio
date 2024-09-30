@@ -1,35 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="theme-color" content="#000000" />
+    <meta charset="utf-8" />
+
+    <!-- Static assets from the public folder -->
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?v8=qAJ44G5Bm7"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16x16.png?v8=qAJ44G5Bm7"
+    />
+    <link
+      rel="mask-icon"
+      href="/safari-pinned-tab.svg?v8=qAJ44G5Bm7"
+      color="#885bd5"
+    />
+    <link rel="shortcut icon" href="/cpLogo.png?v8=qAJ44G5Bm7" />
+
+    <meta name="msapplication-TileColor" content="#603cba" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#6c63ff" />
+    <meta
+      name="Saad Pasta Portfolio"
+      content="Web site created using React and Vite"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png?v8=qAJ44G5Bm7"
+    />
+    <meta property="og:title" content="Saad Pasta Portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://developerfolio.js.org/" />
+    <meta
+      property="og:image"
+      content="https://developerfolio.js.org/static/media/developerActivity.59389695.svg"
+    />
+
+    <!-- Preload fonts -->
+    <link
+      rel="preload"
+      href="/Montserrat-Regular.ee653992.ttf"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/Agustina.21f233e1.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-135618960-2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-135618960-2");
+    </script>
+
     <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="/assets/css/default.css" />
-    <link rel="stylesheet" href="/assets/css/layout.css" />
-    <link rel="stylesheet" href="/assets/css/media-queries.css" />
-    <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalal Chandu | React Js Developer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.13.0/css/all.min.css"
+    />
+
+    <title>My Portfolio | 5 Day React Challenge 🚀</title>
   </head>
   <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- Vite entry point -->
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="/assets/js/jquery-1.10.2.min.js"><\/script>'
-        );
-    </script>
-    <script
-      type="text/javascript"
-      src="/assets/js/jquery-migrate-1.2.1.min.js"
-    ></script>
-    <script src="/assets/js/jquery.flexslider.js"></script>
-    <script src="/assets/js/waypoints.js"></script>
-    <script src="/assets/js/jquery.fittext.js"></script>
-    <script src="/assets/js/magnific-popup.js"></script>
-    <script src="/assets/js/init.js"></script>
   </body>
 </html>
