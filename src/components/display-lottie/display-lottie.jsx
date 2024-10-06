@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Lottie from "react-lottie";
 import Loading from "../../containers/loading/Loading";
 
-export default function DisplayLottie({ animationData }) {
+export const DisplayLottie = ({ animationData }) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -18,7 +18,7 @@ export default function DisplayLottie({ animationData }) {
       </div>
     </Suspense>
   );
-}
+};
 
 // PropTypes validation
 DisplayLottie.propTypes = {

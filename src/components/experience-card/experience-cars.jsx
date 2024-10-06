@@ -1,22 +1,52 @@
 /* eslint-disable react/prop-types */
 import { useState, createRef } from "react";
 import PropTypes from "prop-types";
-import "./ExperienceCard.css";
-import ColorThief from "colorthief";
+import "./experience-card.css";
 
 export default function ExperienceCard({ cardInfo, isDark }) {
-  const [colorArrays, setColorArrays] = useState([]);
+  const [bgColor, setBgColor] = useState("#ffffff"); // Default background color
   const imgRef = createRef();
 
-  function getColorArrays() {
-    const colorThief = new ColorThief();
-    setColorArrays(colorThief.getColor(imgRef.current));
+  // Function to get the dominant color from an image
+  function getDominantColor(img) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    context.drawImage(img, 0, 0);
+
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    let r = 0,
+      g = 0,
+      b = 0,
+      count = 0;
+
+    // Calculate the average color
+    for (let i = 0; i < data.length; i += 4) {
+      r += data[i];
+      g += data[i + 1];
+      b += data[i + 2];
+      count++;
+    }
+
+    return `rgb(${Math.floor(r / count)}, ${Math.floor(
+      g / count
+    )}, ${Math.floor(b / count)})`;
   }
 
-  function rgb(values) {
-    return typeof values === "undefined"
-      ? null
-      : "rgb(" + values.join(", ") + ")";
+  function setBackgroundColor() {
+    const imgElement = imgRef.current;
+    if (imgElement.complete) {
+      const color = getDominantColor(imgElement);
+      setBgColor(color);
+    } else {
+      imgElement.onload = () => {
+        const color = getDominantColor(imgElement);
+        setBgColor(color);
+      };
+    }
   }
 
   const GetDescBullets = ({ descBullets, isDark }) => {
@@ -35,7 +65,7 @@ export default function ExperienceCard({ cardInfo, isDark }) {
   return (
     <div className={isDark ? "experience-card-dark" : "experience-card"}>
       <div
-        style={{ background: rgb(colorArrays) }}
+        style={{ background: bgColor }} // Set the background color here
         className="experience-banner"
       >
         <div className="experience-blurred_div"></div>
@@ -49,7 +79,7 @@ export default function ExperienceCard({ cardInfo, isDark }) {
           className="experience-roundedimg"
           src={cardInfo.companylogo}
           alt={cardInfo.company}
-          onLoad={() => getColorArrays()}
+          onLoad={() => setBackgroundColor()} // Set background color on load
         />
       </div>
       <div className="experience-text-details">

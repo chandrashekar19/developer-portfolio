@@ -1,7 +1,7 @@
-import React from "react";
-import "./TalkCard.css";
+import PropTypes from "prop-types";
+import "./talk-card.css";
 
-export default function TalkCard({talkDetails}) {
+export default function TalkCard({ talkDetails }) {
   return (
     <div>
       <div className="container">
@@ -27,3 +27,22 @@ export default function TalkCard({talkDetails}) {
     </div>
   );
 }
+
+TalkCard.propTypes = {
+  talkDetails: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string,
+    slides_url: PropTypes.string,
+    event_url: PropTypes.string,
+    isDark: PropTypes.bool,
+  }).isRequired,
+};
+
+TalkCard.defaultProps = {
+  talkDetails: {
+    subtitle: "",
+    slides_url: "#",
+    event_url: "#",
+    isDark: false,
+  },
+};

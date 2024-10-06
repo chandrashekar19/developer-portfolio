@@ -1,20 +1,20 @@
-import React from "react";
-import "./Education.css";
-import EducationCard from "../../components/educationCard/EducationCard";
-import {educationInfo} from "../../portfolio";
+import "./education.css";
+import { educationInfo } from "../../data/portfolio";
+import EducationCard from "../../components/education-card/education-card";
 
-export default function Education() {
-  if (educationInfo.display) {
-    return (
+const Education = () => {
+  return (
+    educationInfo.display && (
       <div className="education-section" id="education">
         <h1 className="education-heading">Education</h1>
         <div className="education-card-container">
-          {educationInfo.schools.map(school => (
-            <EducationCard school={school} />
+          {educationInfo.schools.map((school, index) => (
+            <EducationCard key={index} school={school} />
           ))}
         </div>
       </div>
-    );
-  }
-  return null;
-}
+    )
+  );
+};
+
+export default Education;

@@ -1,72 +1,69 @@
-import React, {useState, useEffect, lazy, Suspense} from "react";
-import ApolloClient, {gql} from "apollo-boost";
-import {openSource} from "../../portfolio";
-import Contact from "../contact/Contact";
+import { useState, useEffect, lazy, Suspense } from "react";
+import ApolloClient, { gql } from "apollo-boost";
 import Loading from "../loading/Loading";
+import { Contact } from "../contact/contact";
+import { openSource } from "../../data/portfolio";
 
-const renderLoader = () => <Loading />;
 const GithubProfileCard = lazy(() =>
-  import("../../components/githubProfileCard/GithubProfileCard")
+  import("../../components/github-repo/github-repo")
 );
-export default function Profile() {
-  const [prof, setrepo] = useState([]);
-  function setProfileFunction(array) {
-    setrepo(array);
-  }
-  function getProfileData() {
+
+const Profile = () => {
+  const [profile, setProfile] = useState(null);
+
+  const getProfileData = async () => {
     const client = new ApolloClient({
       uri: "https://api.github.com/graphql",
-      request: operation => {
+      request: (operation) => {
         operation.setContext({
           headers: {
-            authorization: `Bearer ${openSource.githubConvertedToken}`
-          }
+            authorization: `Bearer ${openSource.githubConvertedToken}`,
+          },
         });
-      }
+      },
     });
 
-    client
-      .query({
+    try {
+      const result = await client.query({
         query: gql`
-      {
-        user(login:"${openSource.githubUserName}") { 
-          name
-          bio
-          isHireable
-          avatarUrl
-          location
-        }
-    }
-      `
-      })
-      .then(result => {
-        setProfileFunction(result.data.user);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setProfileFunction("Error");
-        console.log(
-          "Because of this Error Contact Section is Showed instead of Profile"
-        );
-        openSource.showGithubProfile = "false";
+          {
+            user(login: "${openSource.githubUserName}") {
+              name
+              bio
+              isHireable
+              avatarUrl
+              location
+            }
+          }
+        `,
       });
-  }
+      setProfile(result.data.user);
+    } catch (error) {
+      console.error(error);
+      setProfile("Error");
+      openSource.showGithubProfile = "false";
+    }
+  };
+
   useEffect(() => {
     if (openSource.showGithubProfile === "true") {
       getProfileData();
     }
   }, []);
-  if (
-    openSource.display &&
-    openSource.showGithubProfile === "true" &&
-    !(typeof prof === "string" || prof instanceof String)
-  ) {
+
+  if (openSource.display && openSource.showGithubProfile === "true") {
+    if (typeof profile === "string" || profile instanceof String) {
+      return <Contact />;
+    }
+
     return (
-      <Suspense fallback={renderLoader()}>
-        <GithubProfileCard prof={prof} key={prof.id} />
+      <Suspense fallback={<Loading />}>
+        {profile && <GithubProfileCard prof={profile} key={profile.id} />}
       </Suspense>
     );
-  } else {
-    return <Contact />;
   }
-}
+
+  return <Contact />;
+};
+
+export default Profile;

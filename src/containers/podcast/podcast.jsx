@@ -1,14 +1,16 @@
-import React, {useContext} from "react";
-import "./Podcast.css";
-import {podcastSection} from "../../portfolio";
-import {Fade} from "react-reveal";
-import StyleContext from "../../contexts/StyleContext";
+import { useContext } from "react";
+import "./podcast.css";
+import { Fade } from "react-reveal";
+import StyleContext from "../../contexts/style-contexrt";
+import { podcastSection } from "../../data/portfolio";
 
-export default function Podcast() {
-  const {isDark} = useContext(StyleContext);
+const Podcast = () => {
+  const { isDark } = useContext(StyleContext);
+
   if (!podcastSection.display) {
     return null;
   }
+
   return (
     <Fade bottom duration={1000} distance="20px">
       <div className="main">
@@ -25,20 +27,21 @@ export default function Podcast() {
           </p>
         </div>
         <div className="podcast-main-div">
-          {podcastSection.podcast.map((podcastLink, i) => {
-            return (
-              <div key={i}>
-                <iframe
-                  className="podcast"
-                  src={podcastLink}
-                  frameBorder="0"
-                  scrolling="no"
-                ></iframe>
-              </div>
-            );
-          })}
+          {podcastSection.podcast.map((podcastLink, index) => (
+            <div key={index}>
+              <iframe
+                className="podcast"
+                src={podcastLink}
+                frameBorder="0"
+                scrolling="no"
+                title={`Podcast ${index + 1}`}
+              ></iframe>
+            </div>
+          ))}
         </div>
       </div>
     </Fade>
   );
-}
+};
+
+export default Podcast;

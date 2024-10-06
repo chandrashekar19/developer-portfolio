@@ -1,12 +1,12 @@
-import React, {useContext} from "react";
-import "./Talks.css";
-import TalkCard from "../../components/talkCard/TalkCard";
-import {talkSection} from "../../portfolio";
-import {Fade} from "react-reveal";
-import StyleContext from "../../contexts/StyleContext";
+import { useContext } from "react";
+import "./talks.css";
+import { Fade } from "react-reveal";
+import TalkCard from "../../components/talk-card/talk-card";
+import { talkSection } from "../../data/portfolio";
+import StyleContext from "../../contexts/style-contexrt";
 
 export default function Talks() {
-  const {isDark} = useContext(StyleContext);
+  const { isDark } = useContext(StyleContext);
   if (!talkSection.display) {
     return null;
   }
@@ -34,7 +34,7 @@ export default function Talks() {
                   slides_url: talk.slides_url,
                   event_url: talk.event_url,
                   image: talk.image,
-                  isDark
+                  isDark,
                 }}
               />
             );

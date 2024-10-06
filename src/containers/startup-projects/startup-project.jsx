@@ -1,15 +1,15 @@
-import React, {useContext} from "react";
-import "./StartupProjects.css";
-import {bigProjects} from "../../portfolio";
-import {Fade} from "react-reveal";
-import StyleContext from "../../contexts/StyleContext";
+import { useContext } from "react";
+import "./startup-project.css";
+import { Fade } from "react-reveal";
+import { bigProjects } from "../../data/portfolio";
+import StyleContext from "../../contexts/style-contexrt";
 
 export default function StartupProject() {
   function openProjectInNewWindow(url) {
     var win = window.open(url, "_blank");
     win.focus();
   }
-  const {isDark} = useContext(StyleContext);
+  const { isDark } = useContext(StyleContext);
   if (!bigProjects.display) {
     return null;
   }

@@ -1,10 +1,9 @@
-import React, {Suspense, useContext} from "react";
+import { Suspense, useContext } from "react";
 import "./twitter.css";
 import Loading from "../loading/Loading";
-import {TwitterTimelineEmbed} from "react-twitter-embed";
-import {twitterDetails} from "../../portfolio";
-import StyleContext from "../../contexts/StyleContext";
-
+import { TwitterTimelineEmbed } from "react-twitter-embed";
+import StyleContext from "../../contexts/style-contexrt";
+import { twitterDetails } from "../../data/portfolio";
 const renderLoader = () => <Loading />;
 const cantDisplayError =
   "<div className='centerContent'><h2>Can't load? Check privacy protection settings</h2></div>";
@@ -19,7 +18,7 @@ function timeOut() {
 var widthScreen = window.screen.width;
 
 export default function Twitter() {
-  const {isDark} = useContext(StyleContext);
+  const { isDark } = useContext(StyleContext);
 
   if (!twitterDetails.display) {
     return null;
@@ -32,7 +31,7 @@ export default function Twitter() {
             <TwitterTimelineEmbed
               sourceType="profile"
               screenName={twitterDetails.userName}
-              options={{height: 400, width: {widthScreen}}}
+              options={{ height: 400, width: { widthScreen } }}
               placeholder={renderLoader()}
               autoHeight={false}
               borderColor="#fff"

@@ -1,20 +1,22 @@
-import React, {useContext} from "react";
-import {Fade} from "react-reveal";
+import { useContext } from "react";
+import { Fade } from "react-reveal";
 import emoji from "react-easy-emoji";
-import "./Greeting.css";
+import "./greeting.css";
 import landingPerson from "../../assets/lottie/landingPerson";
-import DisplayLottie from "../../components/displayLottie/DisplayLottie";
-import SocialMedia from "../../components/socialMedia/SocialMedia";
-import Button from "../../components/button/Button";
+import SocialMedia from "../../components/social-media/social-media";
+import manOnTable from "../../assets/images/manOnTable.svg"; // Corrected image import
+import { Button } from "../../components/button/Button";
+import { DisplayLottie } from "../../components/display-lottie/display-lottie";
+import { greeting, illustration } from "../../data/portfolio";
+import StyleContext from "../../contexts/style-contexrt";
 
-import {illustration, greeting} from "../../portfolio";
-import StyleContext from "../../contexts/StyleContext";
+export const Greeting = () => {
+  const { isDark } = useContext(StyleContext);
 
-export default function Greeting() {
-  const {isDark} = useContext(StyleContext);
   if (!greeting.displayGreeting) {
     return null;
   }
+
   return (
     <Fade bottom duration={1000} distance="40px">
       <div className="greet-main" id="greeting">
@@ -24,7 +26,6 @@ export default function Greeting() {
               <h1
                 className={isDark ? "dark-mode greeting-text" : "greeting-text"}
               >
-                {" "}
                 {greeting.title}{" "}
                 <span className="wave-emoji">{emoji("👋")}</span>
               </h1>
@@ -52,14 +53,11 @@ export default function Greeting() {
             {illustration.animated ? (
               <DisplayLottie animationData={landingPerson} />
             ) : (
-              <img
-                alt="man sitting on table"
-                src={require("../../assets/images/manOnTable.svg")}
-              ></img>
+              <img alt="man sitting on table" src={manOnTable} />
             )}
           </div>
         </div>
       </div>
     </Fade>
   );
-}
+};
